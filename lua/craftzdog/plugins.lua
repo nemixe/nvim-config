@@ -54,12 +54,12 @@ packer.startup(function(use)
     run = function() vim.fn["mkdp#util#install"]() end,
   })
   -- use 'akinsho/nvim-bufferline.lua'
-  -- use 'github/copilot.vim'
+  use 'github/copilot.vim'
 
   use 'lewis6991/gitsigns.nvim'
   use 'dinhhuy258/git.nvim' -- For git blame & browse
 
-  --use 'lukas-reineke/indent-blankline.nvim' -- Indent line guides
+  -- use 'lukas-reineke/indent-blankline.nvim' -- Indent line guides
   use 'glepnir/indent-guides.nvim' -- Indent guides
 
   --use 'ahmedkhalf/project.nvim' -- Project management
