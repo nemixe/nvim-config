@@ -84,6 +84,7 @@ nvim_lsp.tsserver.setup {
   cmd = { "typescript-language-server", "--stdio" },
   capabilities = capabilities
 }
+
 nvim_lsp.astro.setup {
   on_attach = on_attach,
   filetypes = { "astro" },
@@ -124,11 +125,6 @@ nvim_lsp.tailwindcss.setup {
 }
 
 nvim_lsp.cssls.setup {
-  on_attach = on_attach,
-  capabilities = capabilities
-}
-
-nvim_lsp.astro.setup {
   on_attach = on_attach,
   capabilities = capabilities
 }

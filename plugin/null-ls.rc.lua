@@ -6,23 +6,26 @@ local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
 local lsp_formatting = function(bufnr)
   vim.lsp.buf.format({
     filter = function(client)
-      return client.name == "null-ls"
+      local name = client.name
+      return name == "null-ls" or name == "astro"
     end,
     bufnr = bufnr,
   })
 end
 
-null_ls.setup {
+null_ls.setup({
   sources = {
-    null_ls.builtins.formatting.prettierd,
+    null_ls.builtins.formatting.prettierd.with({
+      extra_filetypes = { "astro" },
+    }),
 
     null_ls.builtins.diagnostics.eslint_d.with({
       filter = function(diagnostic)
         return diagnostic.code and diagnostic.code ~= "prettier/prettier"
       end,
-      diagnostics_format = '[eslint] #{m}\n(#{c})'
+      diagnostics_format = "[eslint] #{m}\n(#{c})",
     }),
-    null_ls.builtins.diagnostics.zsh
+    null_ls.builtins.diagnostics.zsh,
   },
   on_attach = function(client, bufnr)
     if client.supports_method("textDocument/formatting") then
@@ -35,13 +38,9 @@ null_ls.setup {
         end,
       })
     end
-  end
-}
-
-vim.api.nvim_create_user_command(
-  'DisableLspFormatting',
-  function()
-    vim.api.nvim_clear_autocmds({ group = augroup, buffer = 0 })
   end,
-  { nargs = 0 }
-)
+})
+
+vim.api.nvim_create_user_command("DisableLspFormatting", function()
+  vim.api.nvim_clear_autocmds({ group = augroup, buffer = 0 })
+end, { nargs = 0 })
