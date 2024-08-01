@@ -25,7 +25,8 @@ packer.startup(function(use)
   use 'williamboman/mason.nvim'
   use 'williamboman/mason-lspconfig.nvim'
 
-  use 'glepnir/lspsaga.nvim' -- LSP UIs
+  use 'nvimdev/lspsaga.nvim' -- LSP UIs
+  --use 'glepnir/lspsaga.nvim' -- LSP UIs
   --use 'tami5/lspsaga.nvim'
 
   use 'L3MON4D3/LuaSnip'
@@ -59,8 +60,8 @@ packer.startup(function(use)
   use 'lewis6991/gitsigns.nvim'
   use 'dinhhuy258/git.nvim' -- For git blame & browse
 
-  -- use 'lukas-reineke/indent-blankline.nvim' -- Indent line guides
-  use 'glepnir/indent-guides.nvim' -- Indent guides
+  use 'lukas-reineke/indent-blankline.nvim' -- Indent line guides
+  -- use 'glepnir/indent-guides.nvim' -- Indent guides
 
   --use 'ahmedkhalf/project.nvim' -- Project management
 end)
