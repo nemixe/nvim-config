@@ -11,7 +11,7 @@ local default_indent = {
 
 hlchunk.setup({
   chunk = {
-    enable = true,
+    enable = false,
     delay = 10,
     style = { '#FCA7EA' }
     -- ...
@@ -22,7 +22,7 @@ hlchunk.setup({
     style = { '#FCA7EA' }
   },
   blank = {
-    enable = true
+    enable = blank
   },
   context = {
     enable = false
