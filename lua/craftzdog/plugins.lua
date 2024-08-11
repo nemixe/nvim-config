@@ -1,80 +1,24 @@
-local status, packer = pcall(require, "packer")
+-- Bootstrap lazy.nvim
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not (vim.uv or vim.loop).fs_stat(lazypath) then
+    local lazyrepo = "https://github.com/folke/lazy.nvim.git"
+    local out = vim.fn.system({ "git", "clone", "--filter=blob:none", "--branch=stable", lazyrepo, lazypath })
+    if vim.v.shell_error ~= 0 then
+        vim.api.nvim_echo({
+            { "Failed to clone lazy.nvim:\n", "ErrorMsg" },
+            { out, "WarningMsg" },
+            { "\nPress any key to exit..." },
+        }, true, {})
+        vim.fn.getchar()
+        os.exit(1)
+    end
+end
+vim.opt.rtp:prepend(lazypath)
+
+local status, lazy = pcall(require, "lazy")
 if (not status) then
-  print("Packer is not installed")
-  return
+    print("Lazy is not installed")
+    return
 end
 
-vim.cmd [[packadd packer.nvim]]
-
-packer.startup(function(use)
-  use 'wbthomason/packer.nvim'
-  --[[use {
-    'svrana/neosolarized.nvim',
-    requires = { 'tjdevries/colorbuddy.nvim' }
-  }]] --
-  use 'folke/tokyonight.nvim'
-
-  use 'nvim-lualine/lualine.nvim' -- Statusline
-  use 'nvim-lua/plenary.nvim' -- Common utilities
-  use 'onsails/lspkind-nvim' -- vscode-like pictograms
-  use 'hrsh7th/cmp-buffer' -- nvim-cmp source for buffer words
-  use 'hrsh7th/cmp-nvim-lsp' -- nvim-cmp source for neovim's built-in LSP
-  use 'hrsh7th/nvim-cmp' -- Completion
-  use 'neovim/nvim-lspconfig' -- LSP
-  use 'jose-elias-alvarez/null-ls.nvim' -- Use Neovim as a language server to inject LSP diagnostics, code actions, and more via Lua
-  use 'williamboman/mason.nvim'
-  use 'williamboman/mason-lspconfig.nvim'
-
-  use 'nvimdev/lspsaga.nvim' -- LSP UIs
-  --use 'glepnir/lspsaga.nvim' -- LSP UIs
-  --use 'tami5/lspsaga.nvim'
-
-  use 'L3MON4D3/LuaSnip'
-  use {
-    'nvim-treesitter/nvim-treesitter',
-    run = function()
-      require('nvim-treesitter.install').update({ with_sync = true })
-      return ':TSUpdate'
-    end,
-  }
-  use { 'kevinhwang91/nvim-bqf', ft = 'qf' }
-  use { 'junegunn/fzf', run = function()
-    vim.fn['fzf#install']()
-  end
-  }
-  use 'mileszs/ack.vim'
-  use 'kyazdani42/nvim-web-devicons' -- File icons
-  use 'nvim-telescope/telescope.nvim'
-  use 'nvim-telescope/telescope-file-browser.nvim'
-  use 'windwp/nvim-autopairs'
-  use 'windwp/nvim-ts-autotag'
-  use 'norcalli/nvim-colorizer.lua'
-  use 'folke/zen-mode.nvim'
-  use({
-    "iamcco/markdown-preview.nvim",
-    run = function() vim.fn["mkdp#util#install"]() end,
-  })
-  -- use 'akinsho/nvim-bufferline.lua'
-  -- use 'github/copilot.vim'
-  use {
-    'Exafunction/codeium.vim',
-    config = function()
-      -- Change '<C-g>' here to any keycode you like.
-      vim.keymap.set('i', '<C-g>', function() return vim.fn['codeium#Accept']() end, { expr = true, silent = true })
-      vim.keymap.set('i', '<c-;>', function() return vim.fn['codeium#CycleCompletions'](1) end,
-        { expr = true, silent = true })
-      vim.keymap.set('i', '<c-,>', function() return vim.fn['codeium#CycleCompletions'](-1) end,
-        { expr = true, silent = true })
-      vim.keymap.set('i', '<c-x>', function() return vim.fn['codeium#Clear']() end, { expr = true, silent = true })
-    end
-  }
-
-  use 'lewis6991/gitsigns.nvim'
-  use 'dinhhuy258/git.nvim' -- For git blame & browse
-
-  -- use 'lukas-reineke/indent-blankline.nvim' -- Indent line guides
-  -- use 'glepnir/indent-guides.nvim' -- Indent guides
-  use 'shellRaining/hlchunk.nvim'
-
-  --use 'ahmedkhalf/project.nvim' -- Project management
-end)
+lazy.setup('plugins')
