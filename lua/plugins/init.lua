@@ -32,4 +32,10 @@ return {
   -- 'glepnir/indent-guides.nvim', -- Indent guides
 
   --'ahmedkhalf/project.nvim', -- Project management
+  {
+    "supermaven-inc/supermaven-nvim",
+    config = function()
+      require("supermaven-nvim").setup({})
+    end,
+  },
 }

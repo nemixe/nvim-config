@@ -1,6 +1,7 @@
 return {
-  'williamboman/mason.nvim',
-  'williamboman/mason-lspconfig.nvim',
+  "williamboman/mason.nvim",
+  "williamboman/mason-lspconfig.nvim",
+  "neovim/nvim-lspconfig",
   config = function()
     local status, mason = pcall(require, "mason")
     if (not status) then return end
