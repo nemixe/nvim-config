@@ -7,6 +7,26 @@ return {
   'hrsh7th/cmp-buffer', -- nvim-cmp source for buffer words
   'hrsh7th/cmp-nvim-lsp', -- nvim-cmp source for neovim',s built-in LSP
   'hrsh7th/nvim-cmp', -- Completion
+  --[[{
+    'milanglacier/minuet-ai.nvim',
+    config = function()
+      require('minuet').setup {
+        provider = 'openai_compatible',
+        provider_options = {
+          openai_compatible = {
+            end_point = 'https://api.deepseek.com/v1/chat/completions',
+            api_key = 'sk-1bba99267dd443548df636049c391104',
+            name = 'deepseek',
+            optional = {
+              max_tokens = 256,
+              top_p = 0.9,
+            },
+          },
+        },
+      }
+    end,
+  },]] --
+  { 'nvim-lua/plenary.nvim' },
 
   { 'junegunn/fzf',
     build = function()
